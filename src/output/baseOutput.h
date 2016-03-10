@@ -1,18 +1,13 @@
+#ifndef thirdperson_baseoutput
+#define thirdperson_baseoutput
 
-/*
- * Base class for output
- */
-
-#ifndef __sweetspot__baseOutput__
-#define __sweetspot__baseOutput__
-
-class baseOutput {
+class BaseOutput {
 
     public:
-        baseOutput() { mOutputIndex = sOutputCount++; }
-        ~baseOutput(){ sOutputCount--; }
+        BaseOutput() { mOutputIndex = sOutputCount++; }
+        ~BaseOutput(){ sOutputCount--; }
     
-        baseOutput(const baseOutput&) { sOutputCount++; }
+        BaseOutput(const BaseOutput&) { sOutputCount++; }
     
         virtual void setup() = 0;
         virtual void update() = 0;
@@ -26,4 +21,4 @@ class baseOutput {
     
 };
 
-#endif /* defined(__sweetspot__baseOutput__) */
+#endif

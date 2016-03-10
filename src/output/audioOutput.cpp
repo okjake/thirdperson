@@ -1,27 +1,25 @@
+#include "AudioOutput.h"
 
-
-#include "audioOutput.h"
-
-void audioOutput::setup(){
+void AudioOutput::setup(){
     setup("test/test.mp3");
 }
 
-void audioOutput::setup(const char* filepath) {
-    mTrack.loadSound(filepath);
-    mTrack.setVolume(0.0f);
-    mTrack.setMultiPlay(0);
-    mTrack.setLoop(true);
-    mTrack.play();
+void AudioOutput::setup(const char* filepath) {
+    audio_.load(filepath);
+    audio_.setVolume(0.0f);
+    audio_.setMultiPlay(0);
+    audio_.setLoop(true);
+    audio_.play();
 }
 
-void audioOutput::update(){
+void AudioOutput::update(){
     ofSoundUpdate();
 }
 
-void audioOutput::act() {
+void AudioOutput::act() {
     
 }
 
-void audioOutput::setLevel(short level) {
-    mTrack.setVolume(level*0.01f);
+void AudioOutput::setLevel(short level) {
+    audio_.setVolume(level*0.01f);
 }

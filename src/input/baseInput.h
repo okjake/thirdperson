@@ -6,19 +6,19 @@
  * - To add a new input inherit from this class and implement the openInputDevice method (see videoInput)
  */
 
-#ifndef __sweetspot__baseInput__
-#define __sweetspot__baseInput__
+#ifndef thirdperson_baseinput
+#define thirdperson_baseinput
 
-#include "common.h"
+#include "Common.h"
 #include "ofxCv.h"
 
-class baseInput {
+class BaseInput {
   
     public:
-        baseInput() { mInputIndex = sInputCount++; }
-        ~baseInput(){ sInputCount--; }
+        BaseInput() { mInputIndex = sInputCount++; }
+        ~BaseInput(){ sInputCount--; }
     
-        baseInput(const baseInput&) { sInputCount++; }
+        BaseInput(const BaseInput&) { sInputCount++; }
 
         void setup();
         void update();
@@ -37,8 +37,11 @@ class baseInput {
 
         static short sInputCount, sSpotThreshLeft, sSpotThreshRight;
     
-        ofImage  mImg, mDiff, mThresh, mBg;
-        ofPixels mPixels;
+    ofImage img_;
+    ofImage diff_;
+    ofImage thresh_;
+    ofImage bg_;
+    ofPixels px_;
     
         bool         bRecaptureBg, mSweetSpotOccupied;
         unsigned int mInputIndex,  mMeanProxLHS, mMeanProxRHS;
@@ -50,4 +53,4 @@ class baseInput {
 
 };
 
-#endif /* defined(__sweetspot__baseInput__) */
+#endif

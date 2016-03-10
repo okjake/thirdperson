@@ -1,27 +1,27 @@
+#include "ComplimentaryMapper.h"
 
-
-#include "complimentaryMapper.h"
-
-void complimentaryMapper::setup(baseInput *input, baseOutput *outputOne, baseOutput *outputTwo) {
-    mInput = input;
-    mOutputOne = outputOne;
-    mOutputTwo = outputTwo;
-    mTgtOutputOne = mTgtOutputTwo = mPrevOutputOne = mPrevOutputTwo = 0;
+void ComplimentaryMapper::setup(BaseInput *ip, BaseOutput *op1, BaseOutput *op2) {
+    ip_ = ip;
+    op_.one = op1;
+    op_.two = op2;
+    tgt_.one = tgt_.two = 0;
+    prv_.one = prv_.two = 0;
 }
 
 
-void complimentaryMapper::update() {
+void ComplimentaryMapper::update() {
     
-    if (mInput->isSweetSpotOccupied()) {
-        mTgtOutputOne = mTgtOutputTwo = 100;
-    } else {
-        mTgtOutputOne = mInput->getMeanProximity(SECTOR_LEFT);
-        mTgtOutputTwo = mInput->getMeanProximity(SECTOR_RIGHT);
+    bool sweet = ip_->isSweetSpotOccupied();
+    
+    tgt_.one = sweet ? 100 : ip_->getMeanProximity(SECTOR_LEFT);
+    tgt_.two = sweet ? 100 : ip_->getMeanProximity(SECTOR_RIGHT);
+
+    if (tgt_.one != prv_.one) {
+        op_.one->setLevel(tgt_.one > prv_.one ? ++prv_.one : --prv_.one);
     }
     
-    if (mTgtOutputOne > mPrevOutputOne) { mOutputOne->setLevel(++mPrevOutputOne); }
-    else if (mTgtOutputOne < mPrevOutputOne) { mOutputOne->setLevel(--mPrevOutputOne); }
-    
-    if (mTgtOutputTwo > mPrevOutputTwo) { mOutputTwo->setLevel(++mPrevOutputTwo); }
-    else if (mTgtOutputTwo < mPrevOutputTwo) { mOutputTwo->setLevel(--mPrevOutputTwo); }
+    if (tgt_.two != prv_.two) {
+        op_.two->setLevel(tgt_.two > prv_.two ? ++prv_.two : --prv_.two);
+    }
+
 }

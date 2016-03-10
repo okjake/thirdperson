@@ -1,11 +1,11 @@
 #pragma once
 
-#include "common.h"
 #include "ofMain.h"
-#include "cameraInput.h"
-#include "videoInput.h"
-#include "audioOutput.h"
-#include "complimentaryMapper.h"
+#include "Common.h"
+#include "CameraInput.h"
+#include "VideoInput.h"
+#include "AudioOutput.h"
+#include "ComplimentaryMapper.h"
 
 class ofApp : public ofBaseApp{
 
@@ -29,9 +29,9 @@ class ofApp : public ofBaseApp{
     
         bool drawGUI;
     
-        cameraInput camIn;
-        videoInput  vidIn;
-        audioOutput audOut, audOutTwo;
+        CameraInput camIn;
+        VideoInput  vidIn;
+        AudioOutput audOut, audOutTwo;
     
-        complimentaryMapper map;
+        ComplimentaryMapper map;
 };

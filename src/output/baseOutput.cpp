@@ -1,5 +1,3 @@
+#include "BaseOutput.h"
 
-
-#include "baseOutput.h"
-
-unsigned int baseOutput::sOutputCount = 0;
+unsigned int BaseOutput::sOutputCount = 0;

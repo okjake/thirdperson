@@ -1,29 +1,25 @@
+#ifndef thirdperson_linearmapper
+#define thirdperson_linearmapper
 
-/*
- * TODO untested 
- * Linear mapper
- * Maps one sector of one input to a single output
- */
+#include "Common.h"
+#include "BaseInput.h"
+#include "BaseOutput.h"
 
-#ifndef __sweetspot__linearMapper__
-#define __sweetspot__linearMapper__
-
-#include "common.h"
-#include "baseInput.h"
-#include "baseOutput.h"
-
-class linearMapper {
+class LinearMapper {
     
 public:
-    void setup(baseInput *input, baseOutput *output, SWEETSPOT_SECTOR sector);
+    void setup(BaseInput *ip, BaseOutput *op, SWEETSPOT_SECTOR sector);
     void update();
     
 private:
-    baseInput  *mInput;
-    baseOutput *mOutput;
-    short mTgtOutput, mPrevOutput;
-    SWEETSPOT_SECTOR mSector;
+    BaseInput  *ip_;
+    BaseOutput *op_;
+    
+    short tgt_;
+    short prv_;
+    
+    SWEETSPOT_SECTOR sector_;
 };
 
 
-#endif /* defined(__sweetspot__linearMapper__) */
+#endif

@@ -1,26 +1,24 @@
+#ifndef thirdperson_audiooutput
+#define thirdperson_audiooutput
 
-
-#ifndef __sweetspot__audioOutput__
-#define __sweetspot__audioOutput__
-
-#include "baseOutput.h"
+#include "BaseOutput.h"
 #include "ofMain.h"
 
-class audioOutput : public baseOutput {
+class AudioOutput : public BaseOutput {
     
-    public:
-        audioOutput(){};
-        ~audioOutput(){};
-    
-        void setup();
-        void setup(const char* filepath);
-        void update();
-        void act();
-        void setLevel(short level);
-    
-    private:
-        ofSoundPlayer mTrack;
+public:
+    AudioOutput(){};
+    ~AudioOutput(){};
+
+    void setup();
+    void setup(const char* filepath);
+    void update();
+    void act();
+    void setLevel(short level);
+
+private:
+    ofSoundPlayer audio_;
     
 };
 
-#endif /* defined(__sweetspot__audioOutput__) */
+#endif

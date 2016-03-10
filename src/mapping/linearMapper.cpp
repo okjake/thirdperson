@@ -1,26 +1,15 @@
-#include "linearMapper.h"
+#include "LinearMapper.h"
 
-void linearMapper::setup(baseInput *input, baseOutput *output, SWEETSPOT_SECTOR sector) {
-    mInput = input;
-    mOutput = output;
-    mTgtOutput = mPrevOutput = 0;
-    mSector = sector;
+void LinearMapper::setup(BaseInput *ip, BaseOutput *op, SWEETSPOT_SECTOR sector) {
+    ip_ = ip;
+    op_ = op;
+    tgt_ = prv_ = 0;
+    sector_ = sector;
 }
 
-void linearMapper::update() {
-    
-    if (mInput->isSweetSpotOccupied()) {
-        mTgtOutput = 100;
-    }
-    else {
-        mTgtOutput = mInput->getMeanProximity(mSector);
-    }
-    
-    if (mTgtOutput > mPrevOutput) {
-        mOutput->setLevel(++mPrevOutput);
-    }
-    else if (mTgtOutput < mPrevOutput) {
-        mOutput->setLevel(--mPrevOutput);
-    }
+void LinearMapper::update() {
+    tgt_ = ip_->isSweetSpotOccupied() ? 100 : ip_->getMeanProximity(sector_);
+    if (tgt_ == prv_) { return; }
+    op_->setLevel(tgt_ > prv_ ? ++prv_ : --prv_);
     
 }

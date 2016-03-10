@@ -1,4 +1,4 @@
-#include "baseInput.h"
+#include "BaseInput.h"
 
 using namespace ofxCv;
 
@@ -8,52 +8,52 @@ using namespace ofxCv;
 #define SPOT_CENTER 160
 #define SPOT_WIDTH 80
 
-short baseInput::sInputCount = 0;
-short baseInput::sSpotThreshLeft  = SPOT_CENTER - (SPOT_WIDTH / 2);
-short baseInput::sSpotThreshRight = SPOT_CENTER + (SPOT_WIDTH / 2);
+short BaseInput::sInputCount = 0;
+short BaseInput::sSpotThreshLeft  = SPOT_CENTER - (SPOT_WIDTH / 2);
+short BaseInput::sSpotThreshRight = SPOT_CENTER + (SPOT_WIDTH / 2);
 
-void baseInput::setup() {
+void BaseInput::setup() {
     mSweetSpotOccupied = false;
     mMeanProxLHS = mMeanProxRHS = 0;
     openInputDevice(CAPTURE_WIDTH, CAPTURE_HEIGHT, CAPTURE_FRAME_RATE);
-    mImg.setFromPixels(mVid->getPixels(), CAPTURE_WIDTH, CAPTURE_HEIGHT, OF_IMAGE_COLOR);
-    imitate(mPixels, mImg);
-    imitate(mDiff, mImg);
+    img_.setFromPixels(mVid->getPixels(), CAPTURE_WIDTH, CAPTURE_HEIGHT, OF_IMAGE_COLOR);
+    imitate(px_, img_);
+    imitate(diff_, img_);
     ofEnableAlphaBlending();
 }
 
-void baseInput::update() {
+void BaseInput::update() {
     mVid->update();
     if (mVid->isFrameNew()){
-        mImg.setFromPixels(mVid->getPixels(), 320, 240, OF_IMAGE_COLOR);
+        img_.setFromPixels(mVid->getPixels(), 320, 240, OF_IMAGE_COLOR);
         
-        absdiff(mPixels, mImg, mDiff);
-        copy(mImg, mPixels);
+        absdiff(px_, img_, diff_);
+        copy(img_, px_);
         
-        mRunningBg.update(mImg, mThresh);
-        mDiff.update();
-        mThresh.update();
+        mRunningBg.update(img_, thresh_);
+        diff_.update();
+        thresh_.update();
         
         if (bRecaptureBg) {
             mRunningBg.reset();
             bRecaptureBg = false;
         }
         
-        ofPixels mPixelsBg;
-        toOf(mRunningBg.getBackground(), mPixelsBg);
-        mBg.setFromPixels(mPixelsBg);
-        mContourFinder.findContours(mThresh);
+        ofPixels bgpx_;
+        toOf(mRunningBg.getBackground(), bgpx_);
+        bg_.setFromPixels(bgpx_);
+        mContourFinder.findContours(thresh_);
         
         calculateMeanProximities();
     }
 }
 
-void baseInput::drawGUI() {
+void BaseInput::drawGUI() {
     ofSetColor(255, 255, 255);
-    mImg.draw(0, mInputIndex * CAPTURE_HEIGHT);
-    mBg.draw(CAPTURE_WIDTH, mInputIndex * CAPTURE_HEIGHT);
-    mThresh.draw(2*CAPTURE_WIDTH, mInputIndex * CAPTURE_HEIGHT);
-    mDiff.draw(3*CAPTURE_WIDTH, mInputIndex * CAPTURE_HEIGHT);
+    img_.draw(0, mInputIndex * CAPTURE_HEIGHT);
+    bg_.draw(CAPTURE_WIDTH, mInputIndex * CAPTURE_HEIGHT);
+    thresh_.draw(2*CAPTURE_WIDTH, mInputIndex * CAPTURE_HEIGHT);
+    diff_.draw(3*CAPTURE_WIDTH, mInputIndex * CAPTURE_HEIGHT);
     
     ofPushMatrix();
     ofTranslate(ofPoint(2*CAPTURE_WIDTH, mInputIndex * CAPTURE_HEIGHT));
@@ -61,9 +61,9 @@ void baseInput::drawGUI() {
     ofPopMatrix();
     
     ofSetColor(255, 255, 255, 100);
-    ofRect(sSpotThreshLeft, mInputIndex*CAPTURE_HEIGHT, SPOT_WIDTH, CAPTURE_HEIGHT);
+    ofDrawRectangle(sSpotThreshLeft, mInputIndex*CAPTURE_HEIGHT, SPOT_WIDTH, CAPTURE_HEIGHT);
     ofSetColor(255, 255, 255);
-    ofRect(SPOT_CENTER-1, mInputIndex*CAPTURE_HEIGHT, 2, CAPTURE_HEIGHT);
+    ofDrawRectangle(SPOT_CENTER-1, mInputIndex*CAPTURE_HEIGHT, 2, CAPTURE_HEIGHT);
     
     for (int i=0; i < mContourFinder.size(); i++){
         cv::Point2f center = mContourFinder.getCenter(i);
@@ -78,15 +78,15 @@ void baseInput::drawGUI() {
         float repArea = 0.05 * (int)mContourFinder.getContourArea(i);
         if (repArea > CAPTURE_HEIGHT) repArea = CAPTURE_HEIGHT; // TODO hacky
         
-        ofRect(center.x, mInputIndex * CAPTURE_HEIGHT, 5, repArea);
+        ofDrawRectangle(center.x, mInputIndex * CAPTURE_HEIGHT, 5, repArea);
     }
 }
 
-void baseInput::clear() {
+void BaseInput::clear() {
     bRecaptureBg = true;
 }
 
-short baseInput::getMeanProximity(SWEETSPOT_SECTOR sector) {
+short BaseInput::getMeanProximity(SWEETSPOT_SECTOR sector) {
 
     if (sector == SECTOR_RIGHT) return mMeanProxRHS;
     return mMeanProxLHS;
@@ -95,7 +95,7 @@ short baseInput::getMeanProximity(SWEETSPOT_SECTOR sector) {
 /*
  * Helper function returns proximity to sweetspot as percentage
  */
-short baseInput::sweetSpotProximity(short position) {
+short BaseInput::sweetSpotProximity(short position) {
     
     if (position < sSpotThreshLeft) {
         return ((100.0 / sSpotThreshLeft) * position);
@@ -112,14 +112,14 @@ short baseInput::sweetSpotProximity(short position) {
 /* 
  * Find out which sector the position is in
  */
-bool baseInput::isRHS(short position) {
+bool BaseInput::isRHS(short position) {
     return position >= SPOT_CENTER;
 };
 
 /*
  * Calculate the mean proximity per sector
  */
-void baseInput::calculateMeanProximities() {
+void BaseInput::calculateMeanProximities() {
     
     unsigned int countLHS = 0, totalLHS = 0 , countRHS = 0, totalRHS = 0;
     mSweetSpotOccupied = false;

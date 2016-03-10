@@ -4,26 +4,26 @@
  * Maps one input to two complimentary outputs
  */
 
-#ifndef __sweetspot__complimentaryMapper__
-#define __sweetspot__complimentaryMapper__
+#ifndef thirdperson_complimentarymapper
+#define thirdperson_complimentarymapper
 
-#include "common.h"
-#include "baseInput.h"
-#include "baseOutput.h"
+#include "Common.h"
+#include "BaseInput.h"
+#include "BaseOutput.h"
 
-class complimentaryMapper {
+class ComplimentaryMapper {
     
-    public:
-        void setup(baseInput *input, baseOutput *outputOne, baseOutput *outputTwo);
-        void update();
+public:
+    void setup(BaseInput *input, BaseOutput *op1, BaseOutput *op2);
+    void update();
     
-    private:
-        baseInput  *mInput;
-        baseOutput *mOutputOne, *mOutputTwo;
-  
-        short mTgtOutputOne, mTgtOutputTwo, mPrevOutputOne, mPrevOutputTwo;
+private:
+    BaseInput  *ip_;
+    OutputPair op_;
+    ValuePair  tgt_;
+    ValuePair  prv_;
     
 };
 
 
-#endif /* defined(__sweetspot__complimentaryMapper__) */
+#endif

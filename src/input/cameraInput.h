@@ -1,18 +1,17 @@
+#ifndef thirdperson_camerainput
+#define thirdperson_camerainput
 
-#ifndef __sweetspot__cameraInput__
-#define __sweetspot__cameraInput__
+#include "BaseInput.h"
 
-#include "baseInput.h"
-
-class cameraInput : public baseInput
+class CameraInput : public BaseInput
 {
 public:
-    cameraInput(){};
-    ~cameraInput(){};
+    CameraInput(){};
+    ~CameraInput(){};
     void openInputDevice(short captureWidth, short captureHeight, short captureRate);    
 
 private:
     ofVideoGrabber mVideoGrabber;
 };
 
-#endif /* defined(__sweetspot__cameraInput__) */
+#endif

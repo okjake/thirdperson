@@ -1,18 +1,17 @@
+#ifndef thirdperson_videoinput
+#define thirdperson_videoinput
 
-#ifndef __sweetSpot__videoInput__
-#define __sweetSpot__videoInput__
+#include "BaseInput.h"
 
-#include "baseInput.h"
-
-class videoInput : public baseInput
+class VideoInput : public BaseInput
 {
     public:
-        videoInput(){};
-        ~videoInput(){};
+        VideoInput(){};
+        ~VideoInput(){};
         void openInputDevice(short captureWidth, short captureHeight, short captureRate);
     
     private:
         ofVideoPlayer mVideoPlayer;
 
 };
-#endif /* defined(__sweetSpot__videoInput__) */
+#endif

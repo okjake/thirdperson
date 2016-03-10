@@ -1,17 +1,21 @@
-//
-//  common.h
-//  sweetspot
-//
-//  Created by Jake on 03/08/2013.
-//
-//
+#ifndef thirdperson_common_h
+#define thirdperson_common_h
 
-#ifndef sweetspot_common_h
-#define sweetspot_common_h
+#include "BaseOutput.h"
 
 enum SWEETSPOT_SECTOR {
     SECTOR_LEFT,
     SECTOR_RIGHT
+};
+
+struct OutputPair {
+    BaseOutput *one;
+    BaseOutput *two;
+};
+
+struct ValuePair {
+    short one;
+    short two;
 };
 
 #endif
