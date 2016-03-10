@@ -15,7 +15,7 @@
 class BaseInput {
   
     public:
-        BaseInput() { mInputIndex = sInputCount++; }
+        BaseInput() { input_idx_ = input_count_++; }
         ~BaseInput(){ sInputCount--; }
     
         BaseInput(const BaseInput&) { sInputCount++; }
@@ -49,7 +49,7 @@ class BaseInput {
         ofxCv::RunningBackground mRunningBg;
         ofxCv::ContourFinder     mContourFinder;
     
-        ofBaseVideoDraws *mVid;
+        ofBaseVideoDraws *vid_;
 
 };
 

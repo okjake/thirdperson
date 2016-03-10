@@ -5,6 +5,7 @@
 #include "BaseInput.h"
 #include "BaseOutput.h"
 
+// Simple linear mapper
 class LinearMapper {
     
 public:
@@ -12,12 +13,20 @@ public:
     void update();
     
 private:
+    
+    // The input
     BaseInput  *ip_;
+    
+    // The output
     BaseOutput *op_;
     
+    // Target value
     short tgt_;
+    
+    // Previous value for easing
     short prv_;
     
+    // Which sector is to be mapped
     SWEETSPOT_SECTOR sector_;
 };
 

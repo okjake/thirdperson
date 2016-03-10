@@ -1,9 +1,3 @@
-
-/*
- * Complimentary mapper
- * Maps one input to two complimentary outputs
- */
-
 #ifndef thirdperson_complimentarymapper
 #define thirdperson_complimentarymapper
 
@@ -11,6 +5,7 @@
 #include "BaseInput.h"
 #include "BaseOutput.h"
 
+// Maps one input to two complimentary outputs
 class ComplimentaryMapper {
     
 public:
@@ -18,9 +13,17 @@ public:
     void update();
     
 private:
+    
+    // The single input
     BaseInput  *ip_;
+    
+    // The pair of outputs
     OutputPair op_;
+    
+    // Target values calculated on update
     ValuePair  tgt_;
+    
+    // The previous value pair used, kept for easing
     ValuePair  prv_;
     
 };

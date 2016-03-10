@@ -8,10 +8,10 @@ class CameraInput : public BaseInput
 public:
     CameraInput(){};
     ~CameraInput(){};
-    void openInputDevice(short captureWidth, short captureHeight, short captureRate);    
+    void openInputDevice(short cap_width, short cap_height, short cap_rate);
 
 private:
-    ofVideoGrabber mVideoGrabber;
+    ofVideoGrabber grab_;
 };
 
 #endif
