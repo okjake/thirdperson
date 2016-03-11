@@ -8,10 +8,10 @@ class VideoInput : public BaseInput
     public:
         VideoInput(){};
         ~VideoInput(){};
-        void openInputDevice(short captureWidth, short captureHeight, short captureRate);
+        void openInputDevice(short cap_width, short cap_height, short cap_rate);
     
     private:
-        ofVideoPlayer mVideoPlayer;
+        ofVideoPlayer video_;
 
 };
 #endif

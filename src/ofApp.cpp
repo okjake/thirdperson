@@ -2,44 +2,55 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    drawGUI = false;
-    ofBackground(0,0,0);
-    camIn.setup();
-    vidIn.setup();
-    audOut.setup("test/test.mp3");
-    audOutTwo.setup("test/test2.mp3");
-    map.setup(&vidIn, &audOut, &audOutTwo);
+    ofEnableAlphaBlending();
     ofSetVerticalSync(true);
+    
+    draw_gui_ = false;
+    ofBackground(0,0,0);
+    
+    inputs.one = new CameraInput();
+    inputs.one->setup();
+    
+    inputs.two = new VideoInput();
+    inputs.two->setup();
+    
+    outputs.one = new AudioOutput();
+    outputs.one->setup();
+    
+    outputs.two = new AudioOutput();
+    outputs.two->setup();
+
+    map.setup(inputs.two, outputs.one, outputs.two);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    camIn.update();
-    vidIn.update();
-    audOut.update();
-    audOutTwo.update();
+    inputs.one->update();
+    inputs.two->update();
+    outputs.one->update();
+    outputs.two->update();
     map.update();
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    if (drawGUI) {
-        camIn.drawGUI();
-        vidIn.drawGUI();
+    if (draw_gui_) {
+        inputs.one->drawGUI();
+        inputs.two->drawGUI();
     }
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
     if (key == ' ') {
-        camIn.clear();
-        vidIn.clear();
+        inputs.one->clear();
+        inputs.two->clear();
     }
     else if (key == 'f') {
         ofToggleFullscreen();
     }
     else if (key == 'g') {
-        drawGUI = !drawGUI;
+        draw_gui_ = !draw_gui_;
     }
 }
 

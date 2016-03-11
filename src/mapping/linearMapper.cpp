@@ -1,15 +1,17 @@
 #include "LinearMapper.h"
 
-void LinearMapper::setup(BaseInput *ip, BaseOutput *op, SWEETSPOT_SECTOR sector) {
-    ip_ = ip;
-    op_ = op;
-    tgt_ = prv_ = 0;
+void LinearMapper::setup(BaseInput *input, BaseOutput *output, SWEETSPOT_SECTOR sector) {
+    input_  = input;
+    output_ = output;
+    target_ = previous_ = 0;
     sector_ = sector;
 }
 
 void LinearMapper::update() {
-    tgt_ = ip_->isSweetSpotOccupied() ? 100 : ip_->getMeanProximity(sector_);
-    if (tgt_ == prv_) { return; }
-    op_->setLevel(tgt_ > prv_ ? ++prv_ : --prv_);
+    target_ = input_->sweetSpotOccupied() ? 100 : input_->meanProximity(sector_);
+    if (target_ == previous_) {
+        return;
+    }
+    output_->setLevel(target_ > previous_ ? ++previous_ : --previous_);
     
 }

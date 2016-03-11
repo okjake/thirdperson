@@ -9,22 +9,22 @@
 class LinearMapper {
     
 public:
-    void setup(BaseInput *ip, BaseOutput *op, SWEETSPOT_SECTOR sector);
+    void setup(BaseInput *input, BaseOutput *output, SWEETSPOT_SECTOR sector);
     void update();
     
 private:
     
     // The input
-    BaseInput  *ip_;
+    BaseInput  *input_;
     
     // The output
-    BaseOutput *op_;
+    BaseOutput *output_;
     
     // Target value
-    short tgt_;
+    short target_;
     
     // Previous value for easing
-    short prv_;
+    short previous_;
     
     // Which sector is to be mapped
     SWEETSPOT_SECTOR sector_;

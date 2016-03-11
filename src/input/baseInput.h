@@ -14,28 +14,30 @@
 
 class BaseInput {
   
-    public:
-        BaseInput() { input_idx_ = input_count_++; }
-        ~BaseInput(){ sInputCount--; }
-    
-        BaseInput(const BaseInput&) { sInputCount++; }
+public:
+    BaseInput() { index_instance_ = count_instance_++; }
+    ~BaseInput(){ count_instance_--; }
 
-        void setup();
-        void update();
-        void clear();
-        void drawGUI();
-    
-        short getMeanProximity(SWEETSPOT_SECTOR sector);
-        bool  isSweetSpotOccupied(){ return mSweetSpotOccupied; }
-        virtual void openInputDevice(short captureWidth, short captureHeight, short captureRate) = 0;
-    
-    protected:
-    
-        short sweetSpotProximity(short position);
-        bool  isRHS(short position);
-        void  calculateMeanProximities();
+    BaseInput(const BaseInput&) { count_instance_++; }
 
-        static short sInputCount, sSpotThreshLeft, sSpotThreshRight;
+    void setup();
+    void update();
+    void clear();
+    void drawGUI();
+
+    short meanProximity(SWEETSPOT_SECTOR sector);
+    bool  sweetSpotOccupied(){ return spot_occupied_; }
+    
+    virtual void openInputDevice(short cap_width, short cap_height, short cap_rate) = 0;
+    
+protected:
+    
+    short sweetSpotProximity(short position);
+    bool  isRHS(short position);
+    void  calculateMeanProximities();
+
+    static short count_instance_;
+    unsigned int index_instance_;
     
     ofImage img_;
     ofImage diff_;
@@ -43,13 +45,16 @@ class BaseInput {
     ofImage bg_;
     ofPixels px_;
     
-        bool         bRecaptureBg, mSweetSpotOccupied;
-        unsigned int mInputIndex,  mMeanProxLHS, mMeanProxRHS;
+    bool spot_occupied_;
+    bool recapture_background_;
     
-        ofxCv::RunningBackground mRunningBg;
-        ofxCv::ContourFinder     mContourFinder;
+    LRPair spot_threshold_;
+    LRPair mean_proximities_;
     
-        ofBaseVideoDraws *vid_;
+    ofxCv::RunningBackground running_background_;
+    ofxCv::ContourFinder     contour_finder_;
+    
+    ofBaseVideoDraws *feed_;
 
 };
 

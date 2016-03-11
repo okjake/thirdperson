@@ -7,6 +7,11 @@
 #include "AudioOutput.h"
 #include "ComplimentaryMapper.h"
 
+struct InputPair {
+    BaseInput *one;
+    BaseInput *two;
+};
+
 class ofApp : public ofBaseApp{
 
 	public:
@@ -27,11 +32,10 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 
     
-        bool drawGUI;
+        bool draw_gui_;
     
-        CameraInput camIn;
-        VideoInput  vidIn;
-        AudioOutput audOut, audOutTwo;
+    InputPair  inputs;
+    OutputPair outputs;
     
-        ComplimentaryMapper map;
+    ComplimentaryMapper map;
 };

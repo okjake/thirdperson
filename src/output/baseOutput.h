@@ -5,10 +5,10 @@
 class BaseOutput {
 
 public:
-    BaseOutput() { mOutputIndex = sOutputCount++; }
-    ~BaseOutput(){ sOutputCount--; }
+    BaseOutput() { index_instance_ = count_instance_++; }
+    ~BaseOutput(){ count_instance_--; }
 
-    BaseOutput(const BaseOutput&) { sOutputCount++; }
+    BaseOutput(const BaseOutput&) { count_instance_++; }
 
     virtual void setup() = 0;
     virtual void update() = 0;
@@ -16,8 +16,8 @@ public:
     virtual void setLevel(short level) = 0;
     
 protected:
-    static unsigned int sOutputCount;
-    unsigned int        mOutputIndex;
+    static unsigned int count_instance_;
+    unsigned int index_instance_;
 
 };
 

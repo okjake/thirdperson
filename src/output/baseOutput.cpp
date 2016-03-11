@@ -1,3 +1,3 @@
 #include "BaseOutput.h"
 
-unsigned int BaseOutput::sOutputCount = 0;
+unsigned int BaseOutput::count_instance_ = 0;

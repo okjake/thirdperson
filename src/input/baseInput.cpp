@@ -8,41 +8,44 @@ using namespace ofxCv;
 #define SPOT_CENTER 160
 #define SPOT_WIDTH 80
 
-short BaseInput::sInputCount = 0;
-short BaseInput::sSpotThreshLeft  = SPOT_CENTER - (SPOT_WIDTH / 2);
-short BaseInput::sSpotThreshRight = SPOT_CENTER + (SPOT_WIDTH / 2);
+short BaseInput::count_instance_ = 0;
 
 void BaseInput::setup() {
-    mSweetSpotOccupied = false;
-    mMeanProxLHS = mMeanProxRHS = 0;
+    spot_threshold_.left   = SPOT_CENTER - (SPOT_WIDTH / 2);
+    spot_threshold_.right  = SPOT_CENTER + (SPOT_WIDTH / 2);
+    mean_proximities_.left = mean_proximities_.right = 0;
+    spot_occupied_ = false;
+    
     openInputDevice(CAPTURE_WIDTH, CAPTURE_HEIGHT, CAPTURE_FRAME_RATE);
-    img_.setFromPixels(mVid->getPixels(), CAPTURE_WIDTH, CAPTURE_HEIGHT, OF_IMAGE_COLOR);
+    img_.setFromPixels(feed_->getPixels(), CAPTURE_WIDTH, CAPTURE_HEIGHT, OF_IMAGE_COLOR);
+    
     imitate(px_, img_);
     imitate(diff_, img_);
-    ofEnableAlphaBlending();
 }
 
 void BaseInput::update() {
-    mVid->update();
-    if (mVid->isFrameNew()){
-        img_.setFromPixels(mVid->getPixels(), 320, 240, OF_IMAGE_COLOR);
+    
+    feed_->update();
+    
+    if (feed_->isFrameNew()){
+        img_.setFromPixels(feed_->getPixels(), 320, 240, OF_IMAGE_COLOR);
         
         absdiff(px_, img_, diff_);
         copy(img_, px_);
         
-        mRunningBg.update(img_, thresh_);
+        running_background_.update(img_, thresh_);
         diff_.update();
         thresh_.update();
         
-        if (bRecaptureBg) {
-            mRunningBg.reset();
-            bRecaptureBg = false;
+        if (recapture_background_) {
+            running_background_.reset();
+            recapture_background_ = false;
         }
         
         ofPixels bgpx_;
-        toOf(mRunningBg.getBackground(), bgpx_);
+        toOf(running_background_.getBackground(), bgpx_);
         bg_.setFromPixels(bgpx_);
-        mContourFinder.findContours(thresh_);
+        contour_finder_.findContours(thresh_);
         
         calculateMeanProximities();
     }
@@ -50,23 +53,24 @@ void BaseInput::update() {
 
 void BaseInput::drawGUI() {
     ofSetColor(255, 255, 255);
-    img_.draw(0, mInputIndex * CAPTURE_HEIGHT);
-    bg_.draw(CAPTURE_WIDTH, mInputIndex * CAPTURE_HEIGHT);
-    thresh_.draw(2*CAPTURE_WIDTH, mInputIndex * CAPTURE_HEIGHT);
-    diff_.draw(3*CAPTURE_WIDTH, mInputIndex * CAPTURE_HEIGHT);
+    
+    img_.draw(0, index_instance_ * CAPTURE_HEIGHT);
+    bg_.draw(CAPTURE_WIDTH, index_instance_ * CAPTURE_HEIGHT);
+    thresh_.draw(2*CAPTURE_WIDTH, index_instance_ * CAPTURE_HEIGHT);
+    diff_.draw(3*CAPTURE_WIDTH, index_instance_ * CAPTURE_HEIGHT);
     
     ofPushMatrix();
-    ofTranslate(ofPoint(2*CAPTURE_WIDTH, mInputIndex * CAPTURE_HEIGHT));
-    mContourFinder.draw();
+    ofTranslate(ofPoint(2*CAPTURE_WIDTH, index_instance_ * CAPTURE_HEIGHT));
+    contour_finder_.draw();
     ofPopMatrix();
     
     ofSetColor(255, 255, 255, 100);
-    ofDrawRectangle(sSpotThreshLeft, mInputIndex*CAPTURE_HEIGHT, SPOT_WIDTH, CAPTURE_HEIGHT);
+    ofDrawRectangle(spot_threshold_.left, index_instance_ * CAPTURE_HEIGHT, SPOT_WIDTH, CAPTURE_HEIGHT);
     ofSetColor(255, 255, 255);
-    ofDrawRectangle(SPOT_CENTER-1, mInputIndex*CAPTURE_HEIGHT, 2, CAPTURE_HEIGHT);
+    ofDrawRectangle(SPOT_CENTER-1, index_instance_ * CAPTURE_HEIGHT, 2, CAPTURE_HEIGHT);
     
-    for (int i=0; i < mContourFinder.size(); i++){
-        cv::Point2f center = mContourFinder.getCenter(i);
+    for (int i=0; i < contour_finder_.size(); i++){
+        cv::Point2f center = contour_finder_.getCenter(i);
         unsigned short proximity = sweetSpotProximity(center.x);
         
         if (proximity != 100) {
@@ -75,21 +79,21 @@ void BaseInput::drawGUI() {
             ofSetColor(255, 255, 255);
         }
         
-        float repArea = 0.05 * (int)mContourFinder.getContourArea(i);
-        if (repArea > CAPTURE_HEIGHT) repArea = CAPTURE_HEIGHT; // TODO hacky
+        float repArea = 0.05 * (int)contour_finder_.getContourArea(i);
+        if (repArea > CAPTURE_HEIGHT) repArea = CAPTURE_HEIGHT;
         
-        ofDrawRectangle(center.x, mInputIndex * CAPTURE_HEIGHT, 5, repArea);
+        ofDrawRectangle(center.x, index_instance_ * CAPTURE_HEIGHT, 5, repArea);
     }
 }
 
 void BaseInput::clear() {
-    bRecaptureBg = true;
+    recapture_background_ = true;
 }
 
-short BaseInput::getMeanProximity(SWEETSPOT_SECTOR sector) {
+short BaseInput::meanProximity(SWEETSPOT_SECTOR sector) {
 
-    if (sector == SECTOR_RIGHT) return mMeanProxRHS;
-    return mMeanProxLHS;
+    if (sector == SECTOR_RIGHT) return mean_proximities_.right;
+    return mean_proximities_.left;
 }
 
 /*
@@ -97,12 +101,12 @@ short BaseInput::getMeanProximity(SWEETSPOT_SECTOR sector) {
  */
 short BaseInput::sweetSpotProximity(short position) {
     
-    if (position < sSpotThreshLeft) {
-        return ((100.0 / sSpotThreshLeft) * position);
+    if (position < spot_threshold_.left) {
+        return ((100.0 / spot_threshold_.left) * position);
     }
-    else if (position > sSpotThreshRight) {
-        float space = CAPTURE_WIDTH - sSpotThreshRight;
-        return (100.0 / space) * (space - (position - sSpotThreshRight));
+    else if (position > spot_threshold_.right) {
+        float space = CAPTURE_WIDTH - spot_threshold_.right;
+        return (100.0 / space) * (space - (position - spot_threshold_.right));
     }
     
     return 100;
@@ -116,40 +120,35 @@ bool BaseInput::isRHS(short position) {
     return position >= SPOT_CENTER;
 };
 
-/*
- * Calculate the mean proximity per sector
- */
+
+// Calculate the mean proximity per sector
 void BaseInput::calculateMeanProximities() {
     
-    unsigned int countLHS = 0, totalLHS = 0 , countRHS = 0, totalRHS = 0;
-    mSweetSpotOccupied = false;
+    LRPair count;
+    LRPair total;
+    count.left = count.right = 0;
+    total.left = total.right = 0;
+    spot_occupied_ = false;
     
-    for (int i=0; i < mContourFinder.size(); i++){
-        cv::Point2f center = mContourFinder.getCenter(i);
+    for (int i=0; i < contour_finder_.size(); i++){
+        cv::Point2f center = contour_finder_.getCenter(i);
         
         // Set the occupied flag if they are in the sweet spot
-        if (sSpotThreshLeft <= center.x && center.x <= sSpotThreshRight) {
-            mSweetSpotOccupied = true;
+        if (spot_threshold_.left <= center.x && center.x <= spot_threshold_.right) {
+            spot_occupied_ = true;
         }
         
         if (isRHS(center.x)) {
-            countRHS++;
-            totalRHS += sweetSpotProximity(center.x);
+            count.right++;
+            total.right += sweetSpotProximity(center.x);
         } else {
-            countLHS++;
-            totalLHS += sweetSpotProximity(center.x);
+            count.left++;
+            total.left += sweetSpotProximity(center.x);
         }
     }
     
-    if (countLHS)
-        mMeanProxLHS = (totalLHS/countLHS);
-    else
-        mMeanProxLHS = 0;
-
-    if (countRHS)
-        mMeanProxRHS = (totalRHS/countRHS);
-    else
-        mMeanProxRHS = 0;
+    mean_proximities_.left  = count.left  ? (total.left  / count.left ) : 0;
+    mean_proximities_.right = count.right ? (total.right / count.right) : 0;
 
 }
 

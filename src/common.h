@@ -18,4 +18,9 @@ struct ValuePair {
     short two;
 };
 
+struct LRPair {
+    unsigned int left;
+    unsigned int right;
+};
+
 #endif

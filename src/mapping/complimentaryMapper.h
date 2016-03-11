@@ -9,22 +9,22 @@
 class ComplimentaryMapper {
     
 public:
-    void setup(BaseInput *input, BaseOutput *op1, BaseOutput *op2);
+    void setup(BaseInput *input, BaseOutput *output1, BaseOutput *output2);
     void update();
     
 private:
     
     // The single input
-    BaseInput  *ip_;
+    BaseInput  *input_;
     
     // The pair of outputs
-    OutputPair op_;
+    OutputPair output_;
     
     // Target values calculated on update
-    ValuePair  tgt_;
+    ValuePair  target_;
     
     // The previous value pair used, kept for easing
-    ValuePair  prv_;
+    ValuePair  previous_;
     
 };
 
