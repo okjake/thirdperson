@@ -1,7 +1,7 @@
 #ifndef thirdperson_videoinput
 #define thirdperson_videoinput
 
-#include "BaseInput.h"
+#include "base_input.h"
 
 class VideoInput : public BaseInput
 {

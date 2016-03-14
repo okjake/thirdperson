@@ -1,7 +1,7 @@
 #ifndef thirdperson_camerainput
 #define thirdperson_camerainput
 
-#include "BaseInput.h"
+#include "base_input.h"
 
 class CameraInput : public BaseInput
 {

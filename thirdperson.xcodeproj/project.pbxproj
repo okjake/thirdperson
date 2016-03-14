@@ -13,13 +13,14 @@
 		100D9D091FA5AF463348A7FE /* ofxSlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1190CC0D572BCB108B7A89A /* ofxSlider.cpp */; };
 		1261B90AEEB838C5BE429F95 /* OscTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE2D6B8CFF599BF7323711F4 /* OscTypes.cpp */; };
 		1C9FB01451E5346796D1CF3A /* IpEndpointName.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 39FAB347DA920BD3F675587C /* IpEndpointName.cpp */; };
-		236C05651C922EE100D39984 /* BaseInput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 236C055F1C922EE100D39984 /* BaseInput.cpp */; };
-		236C05661C922EE100D39984 /* CameraInput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 236C05611C922EE100D39984 /* CameraInput.cpp */; };
-		236C05671C922EE100D39984 /* VideoInput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 236C05631C922EE100D39984 /* VideoInput.cpp */; };
-		236C056D1C922EE800D39984 /* ComplimentaryMapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 236C05691C922EE800D39984 /* ComplimentaryMapper.cpp */; };
-		236C056E1C922EE800D39984 /* LinearMapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 236C056B1C922EE800D39984 /* LinearMapper.cpp */; };
-		236C05741C922EF200D39984 /* AudioOutput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 236C05701C922EF200D39984 /* AudioOutput.cpp */; };
-		236C05751C922EF200D39984 /* BaseOutput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 236C05721C922EF200D39984 /* BaseOutput.cpp */; };
+		23C627651C97485A00B19E9E /* audio_output.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23C627611C97485A00B19E9E /* audio_output.cpp */; };
+		23C627661C97485A00B19E9E /* base_output.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23C627631C97485A00B19E9E /* base_output.cpp */; };
+		23C6276B1C97486200B19E9E /* complimentary_mapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23C627671C97486200B19E9E /* complimentary_mapper.cpp */; };
+		23C6276C1C97486200B19E9E /* linear_mapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23C627691C97486200B19E9E /* linear_mapper.cpp */; };
+		23C627731C97486A00B19E9E /* base_input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23C6276D1C97486A00B19E9E /* base_input.cpp */; };
+		23C627741C97486A00B19E9E /* camera_input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23C6276F1C97486A00B19E9E /* camera_input.cpp */; };
+		23C627751C97486A00B19E9E /* video_input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23C627711C97486A00B19E9E /* video_input.cpp */; };
+		23C627781C97495900B19E9E /* osc_output.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23C627761C97495900B19E9E /* osc_output.cpp */; };
 		2A9CAC1B3A5BC002E477AFE6 /* ofxSliderGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3E8D0BE102A22E7598C988E /* ofxSliderGroup.cpp */; };
 		39F5AFFD0A9B4D8970DFE524 /* Flow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD3207433B075F5078CEC6FF /* Flow.cpp */; };
 		3B48182E5A98F7B699739A48 /* ofxCvShortImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAAE6A54B8C326C5B6069D8A /* ofxCvShortImage.cpp */; };
@@ -121,22 +122,24 @@
 		1E8907EBFA3E65C918FCA179 /* hierarchical_clustering_index.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = hierarchical_clustering_index.h; path = ../../openframeworks/of_v0.9.3_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/flann/hierarchical_clustering_index.h; sourceTree = SOURCE_ROOT; };
 		205F24A36359273AA793C135 /* util_inl.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = util_inl.hpp; path = ../../openframeworks/of_v0.9.3_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/stitching/detail/util_inl.hpp; sourceTree = SOURCE_ROOT; };
 		2252F866B83C3B5363D74D91 /* internal.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = internal.hpp; path = ../../openframeworks/of_v0.9.3_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/internal.hpp; sourceTree = SOURCE_ROOT; };
-		236C055A1C922E9600D39984 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
-		236C055F1C922EE100D39984 /* BaseInput.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseInput.cpp; sourceTree = "<group>"; };
-		236C05601C922EE100D39984 /* BaseInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseInput.h; sourceTree = "<group>"; };
-		236C05611C922EE100D39984 /* CameraInput.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CameraInput.cpp; sourceTree = "<group>"; };
-		236C05621C922EE100D39984 /* CameraInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraInput.h; sourceTree = "<group>"; };
-		236C05631C922EE100D39984 /* VideoInput.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VideoInput.cpp; sourceTree = "<group>"; };
-		236C05641C922EE100D39984 /* VideoInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoInput.h; sourceTree = "<group>"; };
-		236C05691C922EE800D39984 /* ComplimentaryMapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ComplimentaryMapper.cpp; sourceTree = "<group>"; };
-		236C056A1C922EE800D39984 /* ComplimentaryMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComplimentaryMapper.h; sourceTree = "<group>"; };
-		236C056B1C922EE800D39984 /* LinearMapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LinearMapper.cpp; sourceTree = "<group>"; };
-		236C056C1C922EE800D39984 /* LinearMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinearMapper.h; sourceTree = "<group>"; };
-		236C05701C922EF200D39984 /* AudioOutput.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioOutput.cpp; sourceTree = "<group>"; };
-		236C05711C922EF200D39984 /* AudioOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioOutput.h; sourceTree = "<group>"; };
-		236C05721C922EF200D39984 /* BaseOutput.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseOutput.cpp; sourceTree = "<group>"; };
-		236C05731C922EF200D39984 /* BaseOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseOutput.h; sourceTree = "<group>"; };
+		236C055A1C922E9600D39984 /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
 		23AC8B3BEC6164D38ED35043 /* heap.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = heap.h; path = ../../openframeworks/of_v0.9.3_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/flann/heap.h; sourceTree = SOURCE_ROOT; };
+		23C627611C97485A00B19E9E /* audio_output.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = audio_output.cpp; sourceTree = "<group>"; };
+		23C627621C97485A00B19E9E /* audio_output.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = audio_output.h; sourceTree = "<group>"; };
+		23C627631C97485A00B19E9E /* base_output.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = base_output.cpp; sourceTree = "<group>"; };
+		23C627641C97485A00B19E9E /* base_output.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = base_output.h; sourceTree = "<group>"; };
+		23C627671C97486200B19E9E /* complimentary_mapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = complimentary_mapper.cpp; sourceTree = "<group>"; };
+		23C627681C97486200B19E9E /* complimentary_mapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = complimentary_mapper.h; sourceTree = "<group>"; };
+		23C627691C97486200B19E9E /* linear_mapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = linear_mapper.cpp; sourceTree = "<group>"; };
+		23C6276A1C97486200B19E9E /* linear_mapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = linear_mapper.h; sourceTree = "<group>"; };
+		23C6276D1C97486A00B19E9E /* base_input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = base_input.cpp; sourceTree = "<group>"; };
+		23C6276E1C97486A00B19E9E /* base_input.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = base_input.h; sourceTree = "<group>"; };
+		23C6276F1C97486A00B19E9E /* camera_input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = camera_input.cpp; sourceTree = "<group>"; };
+		23C627701C97486A00B19E9E /* camera_input.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = camera_input.h; sourceTree = "<group>"; };
+		23C627711C97486A00B19E9E /* video_input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = video_input.cpp; sourceTree = "<group>"; };
+		23C627721C97486A00B19E9E /* video_input.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = video_input.h; sourceTree = "<group>"; };
+		23C627761C97495900B19E9E /* osc_output.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = osc_output.cpp; sourceTree = "<group>"; };
+		23C627771C97495900B19E9E /* osc_output.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = osc_output.h; sourceTree = "<group>"; };
 		24F4CCEDCF3AED2E3D291D40 /* OscReceivedElements.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = OscReceivedElements.cpp; path = ../../openframeworks/of_v0.9.3_osx_release/addons/ofxOsc/libs/oscpack/src/osc/OscReceivedElements.cpp; sourceTree = SOURCE_ROOT; };
 		259A3EB243E86A33FAAEDAF1 /* cv.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = cv.h; path = ../../openframeworks/of_v0.9.3_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv/cv.h; sourceTree = SOURCE_ROOT; };
 		2A6847047C0C68ABA598A9D5 /* RunningBackground.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = RunningBackground.h; path = ../../openframeworks/of_v0.9.3_osx_release/addons/ofxCv/libs/ofxCv/include/ofxCv/RunningBackground.h; sourceTree = SOURCE_ROOT; };
@@ -493,12 +496,12 @@
 		236C055E1C922EE100D39984 /* input */ = {
 			isa = PBXGroup;
 			children = (
-				236C055F1C922EE100D39984 /* BaseInput.cpp */,
-				236C05601C922EE100D39984 /* BaseInput.h */,
-				236C05611C922EE100D39984 /* CameraInput.cpp */,
-				236C05621C922EE100D39984 /* CameraInput.h */,
-				236C05631C922EE100D39984 /* VideoInput.cpp */,
-				236C05641C922EE100D39984 /* VideoInput.h */,
+				23C6276D1C97486A00B19E9E /* base_input.cpp */,
+				23C6276E1C97486A00B19E9E /* base_input.h */,
+				23C6276F1C97486A00B19E9E /* camera_input.cpp */,
+				23C627701C97486A00B19E9E /* camera_input.h */,
+				23C627711C97486A00B19E9E /* video_input.cpp */,
+				23C627721C97486A00B19E9E /* video_input.h */,
 			);
 			path = input;
 			sourceTree = "<group>";
@@ -506,10 +509,10 @@
 		236C05681C922EE800D39984 /* mapping */ = {
 			isa = PBXGroup;
 			children = (
-				236C05691C922EE800D39984 /* ComplimentaryMapper.cpp */,
-				236C056A1C922EE800D39984 /* ComplimentaryMapper.h */,
-				236C056B1C922EE800D39984 /* LinearMapper.cpp */,
-				236C056C1C922EE800D39984 /* LinearMapper.h */,
+				23C627671C97486200B19E9E /* complimentary_mapper.cpp */,
+				23C627681C97486200B19E9E /* complimentary_mapper.h */,
+				23C627691C97486200B19E9E /* linear_mapper.cpp */,
+				23C6276A1C97486200B19E9E /* linear_mapper.h */,
 			);
 			name = mapping;
 			path = src/mapping;
@@ -518,10 +521,12 @@
 		236C056F1C922EF200D39984 /* output */ = {
 			isa = PBXGroup;
 			children = (
-				236C05701C922EF200D39984 /* AudioOutput.cpp */,
-				236C05711C922EF200D39984 /* AudioOutput.h */,
-				236C05721C922EF200D39984 /* BaseOutput.cpp */,
-				236C05731C922EF200D39984 /* BaseOutput.h */,
+				23C627611C97485A00B19E9E /* audio_output.cpp */,
+				23C627621C97485A00B19E9E /* audio_output.h */,
+				23C627631C97485A00B19E9E /* base_output.cpp */,
+				23C627641C97485A00B19E9E /* base_output.h */,
+				23C627761C97495900B19E9E /* osc_output.cpp */,
+				23C627771C97495900B19E9E /* osc_output.h */,
 			);
 			path = output;
 			sourceTree = "<group>";
@@ -1048,7 +1053,7 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				236C055A1C922E9600D39984 /* Common.h */,
+				236C055A1C922E9600D39984 /* common.h */,
 				236C05681C922EE800D39984 /* mapping */,
 				236C056F1C922EF200D39984 /* output */,
 				236C055E1C922EE100D39984 /* input */,
@@ -1207,6 +1212,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23C627781C97495900B19E9E /* osc_output.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
 				7809165DE3ABEBF0A59210A8 /* ETF.cpp in Sources */,
@@ -1215,31 +1221,32 @@
 				04598936D144D9D989C01846 /* ContourFinder.cpp in Sources */,
 				8173C57D32BD827A0ECA0448 /* Distance.cpp in Sources */,
 				39F5AFFD0A9B4D8970DFE524 /* Flow.cpp in Sources */,
+				23C627731C97486A00B19E9E /* base_input.cpp in Sources */,
+				23C627741C97486A00B19E9E /* camera_input.cpp in Sources */,
 				BB350446537B62DEDBF606EC /* Helpers.cpp in Sources */,
+				23C6276C1C97486200B19E9E /* linear_mapper.cpp in Sources */,
 				9E54EDBC0CB42569F9B6723E /* Kalman.cpp in Sources */,
 				93C0FAEE5F05FD38B4AA56C0 /* ObjectFinder.cpp in Sources */,
+				23C627751C97486A00B19E9E /* video_input.cpp in Sources */,
 				6FCFAC59827B6097BCA81BD0 /* RunningBackground.cpp in Sources */,
 				A20144EFEB75C772FF0BAE5D /* Tracker.cpp in Sources */,
 				E04A45783BDE67BDDF820F79 /* Utilities.cpp in Sources */,
 				63C08E50361EF4773F3C7972 /* Wrappers.cpp in Sources */,
+				23C627661C97485A00B19E9E /* base_output.cpp in Sources */,
 				77F0BE595F055C8F6DCC9268 /* ofxBaseGui.cpp in Sources */,
 				5F0FBFF85F2FEE297C194656 /* ofxButton.cpp in Sources */,
-				236C05671C922EE100D39984 /* VideoInput.cpp in Sources */,
+				23C627651C97485A00B19E9E /* audio_output.cpp in Sources */,
 				DDA8BD164D793110C8BC4E2E /* ofxGuiGroup.cpp in Sources */,
-				236C05741C922EF200D39984 /* AudioOutput.cpp in Sources */,
 				5136C268CB8301AA51D83B41 /* ofxLabel.cpp in Sources */,
 				CA4876DCFF1ECB58E27591CA /* ofxPanel.cpp in Sources */,
 				100D9D091FA5AF463348A7FE /* ofxSlider.cpp in Sources */,
 				2A9CAC1B3A5BC002E477AFE6 /* ofxSliderGroup.cpp in Sources */,
-				236C056E1C922EE800D39984 /* LinearMapper.cpp in Sources */,
 				D2547114CA42BF3D7271F5B6 /* ofxToggle.cpp in Sources */,
 				7C3C9899A022EB9FAAA3F4A3 /* ofxCvColorImage.cpp in Sources */,
 				D3F0405A694830806F2AA03C /* ofxCvContourFinder.cpp in Sources */,
 				A5F0CC759647309197705A48 /* ofxCvFloatImage.cpp in Sources */,
-				236C05651C922EE100D39984 /* BaseInput.cpp in Sources */,
 				85BE22B7D06935AC8BC44956 /* ofxCvGrayscaleImage.cpp in Sources */,
 				8770E9B2B5AE446233E9D43A /* ofxCvHaarFinder.cpp in Sources */,
-				236C05751C922EF200D39984 /* BaseOutput.cpp in Sources */,
 				77723858F29E359E6093DAC8 /* ofxCvImage.cpp in Sources */,
 				3B48182E5A98F7B699739A48 /* ofxCvShortImage.cpp in Sources */,
 				A4BF2526F9976D613262E611 /* ofxOscBundle.cpp in Sources */,
@@ -1248,12 +1255,11 @@
 				040E04449C80A27ACFEE5CEF /* ofxOscReceiver.cpp in Sources */,
 				5EBF0C52A7BEB606F0E1F477 /* ofxOscSender.cpp in Sources */,
 				1C9FB01451E5346796D1CF3A /* IpEndpointName.cpp in Sources */,
-				236C05661C922EE100D39984 /* CameraInput.cpp in Sources */,
 				0B2871E9CA85B6CED6876237 /* NetworkingUtils.cpp in Sources */,
 				97B2DA37E32AC897345AB9A8 /* UdpSocket.cpp in Sources */,
 				45DB73B7677A84C8512E2263 /* OscOutboundPacketStream.cpp in Sources */,
 				AC3181E4537BF900864D1571 /* OscPrintReceivedElements.cpp in Sources */,
-				236C056D1C922EE800D39984 /* ComplimentaryMapper.cpp in Sources */,
+				23C6276B1C97486200B19E9E /* complimentary_mapper.cpp in Sources */,
 				D1D39C51DE3C11E7567D3C6A /* OscReceivedElements.cpp in Sources */,
 				1261B90AEEB838C5BE429F95 /* OscTypes.cpp in Sources */,
 			);

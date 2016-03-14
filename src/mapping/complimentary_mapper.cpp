@@ -1,4 +1,4 @@
-#include "ComplimentaryMapper.h"
+#include "complimentary_mapper.h"
 
 void ComplimentaryMapper::setup(BaseInput *input, BaseOutput *output1, BaseOutput *output2) {
     input_ = input;

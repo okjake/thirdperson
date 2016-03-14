@@ -1,9 +1,9 @@
 #ifndef thirdperson_linearmapper
 #define thirdperson_linearmapper
 
-#include "Common.h"
-#include "BaseInput.h"
-#include "BaseOutput.h"
+#include "common.h"
+#include "base_input.h"
+#include "base_output.h"
 
 // Simple linear mapper
 class LinearMapper {

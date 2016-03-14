@@ -1,5 +1,4 @@
-
-#include "CameraInput.h"
+#include "camera_input.h"
 
 void CameraInput::openInputDevice(short cap_width, short cap_height, short cap_rate) {
     feed_ = &grab_;

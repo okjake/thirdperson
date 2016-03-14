@@ -1,11 +1,11 @@
 #pragma once
 
 #include "ofMain.h"
-#include "Common.h"
-#include "CameraInput.h"
-#include "VideoInput.h"
-#include "AudioOutput.h"
-#include "ComplimentaryMapper.h"
+#include "common.h"
+#include "camera_input.h"
+#include "video_input.h"
+#include "audio_output.h"
+#include "complimentary_mapper.h"
 
 struct InputPair {
     BaseInput *one;
@@ -34,8 +34,8 @@ class ofApp : public ofBaseApp{
     
         bool draw_gui_;
     
-    InputPair  inputs;
-    OutputPair outputs;
+        InputPair  inputs;
+        OutputPair outputs;
     
-    ComplimentaryMapper map;
+        ComplimentaryMapper map;
 };

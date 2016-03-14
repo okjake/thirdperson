@@ -1,4 +1,4 @@
-#include "BaseInput.h"
+#include "base_input.h"
 
 using namespace ofxCv;
 

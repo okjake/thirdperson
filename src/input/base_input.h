@@ -9,7 +9,7 @@
 #ifndef thirdperson_baseinput
 #define thirdperson_baseinput
 
-#include "Common.h"
+#include "common.h"
 #include "ofxCv.h"
 
 class BaseInput {

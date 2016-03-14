@@ -1,7 +1,7 @@
 #ifndef thirdperson_common_h
 #define thirdperson_common_h
 
-#include "BaseOutput.h"
+#include "base_output.h"
 
 enum SWEETSPOT_SECTOR {
     SECTOR_LEFT,

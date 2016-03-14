@@ -1,9 +1,9 @@
 #ifndef thirdperson_complimentarymapper
 #define thirdperson_complimentarymapper
 
-#include "Common.h"
-#include "BaseInput.h"
-#include "BaseOutput.h"
+#include "common.h"
+#include "base_input.h"
+#include "base_output.h"
 
 // Maps one input to two complimentary outputs
 class ComplimentaryMapper {

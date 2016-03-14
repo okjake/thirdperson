@@ -1,4 +1,4 @@
-#include "LinearMapper.h"
+#include "linear_mapper.h"
 
 void LinearMapper::setup(BaseInput *input, BaseOutput *output, SWEETSPOT_SECTOR sector) {
     input_  = input;
